@@ -40,7 +40,8 @@ class User(models.Model):
     # User type and role
     role = models.CharField(max_length=20, default="buyer")  # seller or buyer
     
-    # Seller-specific fields=True, blank=True)
+    # Seller-specific fields
+    store_name = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=50, null=True, blank=True)
     channel_username = models.CharField(max_length=255, null=True, blank=True)
     

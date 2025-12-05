@@ -364,7 +364,10 @@ def escape_markdown(text: str) -> str:
     """Escape markdown special characters"""
     if text is None:
         return ""
-    special_chars = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!']
+    # We only escape core MarkdownV2 control characters.
+    # Normal punctuation like hyphens, dots and parentheses are left as-is
+    # so user-entered descriptions don't get cluttered with backslashes.
+    special_chars = ['_', '*', '[', ']', '~', '`', '>', '#', '+', '=', '|', '{', '}', '!']
     for char in special_chars:
         text = text.replace(char, f'\\{char}')
     return text

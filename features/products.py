@@ -352,12 +352,13 @@ async def process_single_photo(message: Message, state: FSMContext):
     
     await message.bot.download_file(file.file_path, file_path)
     
-    # Get user info for watermark - prefer shop name, then username
+    # Get user info for watermark - prefer store name, then username.
+    # Do not fall back to a hardcoded value so missing data is visible.
     user = await db.get_user(user_id)
     if user:
-        store_name = user.store_name or user.username or "Shop"
+        store_name = user.store_name or user.username or ""
     else:
-        store_name = "Shop"
+        store_name = ""
     
     # Watermark the image
     watermarked_path = await add_watermark(file_path, store_name, file_path)
@@ -565,9 +566,9 @@ async def process_multiple_photos(message: Message, state: FSMContext, collected
         user_id = message.from_user.id
         user = await db.get_user(user_id)
         if user:
-            store_name = user.store_name or user.username or "Shop"
+            store_name = user.store_name or user.username or ""
         else:
-            store_name = "Shop"
+            store_name = ""
         
         # Watermark all photos separately
         watermarked_paths = []
@@ -1603,6 +1604,9 @@ async def cmd_view_product(message: Message):
     
     # Get seller info
     seller = await db.get_user(product.seller_id)
+    seller_name = None
+    if seller:
+        seller_name = getattr(seller, "store_name", None) or seller.username or "Your Store"
     
     # Create detailed caption
     caption = format_product_caption(
@@ -1615,8 +1619,8 @@ async def cmd_view_product(message: Message):
             'saves_count': product.saves_count,
             'orders_count': product.orders_count
         },
-        seller_name=seller.store_name if not is_owner else None,
-        seller_phone=seller.phone if not is_owner else None,
+        seller_name=seller_name if (seller and not is_owner) else None,
+        seller_phone=seller.phone if (seller and not is_owner) else None,
         product_type=getattr(product, 'product_type', 'standard'),
         category_fields=getattr(product, 'category_fields', None)
     )
@@ -1685,6 +1689,11 @@ async def handle_post_to_channel(callback: CallbackQuery):
         
         await callback.answer("📤 Posting to your channel...", show_alert=False)
         
+        # Prepare seller display name with safe fallbacks
+        seller_name = None
+        if seller:
+            seller_name = getattr(seller, "store_name", None) or seller.username or "Your Store"
+
         # Create post caption with seller info
         caption = format_product_caption(
             title=product.title,
@@ -1696,8 +1705,8 @@ async def handle_post_to_channel(callback: CallbackQuery):
                 'saves_count': product.saves_count,
                 'orders_count': product.orders_count
             },
-            seller_name=seller.store_name,
-            seller_phone=seller.phone,
+            seller_name=seller_name,
+            seller_phone=seller.phone if seller else None,
             product_type=getattr(product, 'product_type', 'standard'),
             category_fields=getattr(product, 'category_fields', None),
             for_channel=True
