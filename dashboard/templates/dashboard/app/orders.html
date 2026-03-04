@@ -1,0 +1,104 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-2xl font-bold text-brand-text">Orders Configuration</h1>
+    <p class="text-sm text-brand-muted mt-1">Manage incoming orders from Telegram users.</p>
+</div>
+
+<!-- Tabs (Alpine data for rapid state switching) -->
+<div class="mb-6 border-b border-brand-border/50" x-data="{ tab: 'all' }">
+    <nav class="-mb-px flex space-x-6">
+        <button @click="tab = 'all'"
+            :class="tab === 'all' ? 'border-brand-cyan text-brand-cyan' : 'border-transparent text-brand-muted hover:border-brand-border hover:text-brand-text'"
+            class="whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-colors">
+            All Orders
+        </button>
+        <button @click="tab = 'pending'"
+            :class="tab === 'pending' ? 'border-brand-cyan text-brand-cyan' : 'border-transparent text-brand-muted hover:border-brand-border hover:text-brand-text'"
+            class="whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-colors flex items-center gap-2">
+            Pending
+            <span class="rounded-full bg-yellow-500/20 px-2 py-0.5 text-xs text-yellow-500">2</span>
+        </button>
+        <button @click="tab = 'completed'"
+            :class="tab === 'completed' ? 'border-brand-cyan text-brand-cyan' : 'border-transparent text-brand-muted hover:border-brand-border hover:text-brand-text'"
+            class="whitespace-nowrap border-b-2 py-3 text-sm font-medium transition-colors">
+            Completed
+        </button>
+    </nav>
+</div>
+
+<div class="card">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-brand-muted">
+            <thead class="bg-brand-darker text-xs uppercase text-brand-muted border-b border-brand-border/50">
+                <tr>
+                    <th scope="col" class="px-6 py-4 font-medium">Order ID</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Customer</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Date</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Total</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Status</th>
+                    <th scope="col" class="px-6 py-4 font-medium text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-brand-border/50">
+                <!-- Row 1 -->
+                <tr class="hover:bg-brand-border/20 transition-colors">
+                    <td class="px-6 py-4 font-medium text-brand-text"><a href="{% url 'dashboard:order_detail' 1042 %}"
+                            class="hover:text-brand-cyan transition-colors">#1042</a></td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2 text-brand-text">
+                            <div
+                                class="h-6 w-6 rounded-full bg-brand-border/80 flex items-center justify-center text-[10px] font-bold">
+                                BK</div>
+                            Bemenet K.
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">Today, 2:34 PM</td>
+                    <td class="px-6 py-4 font-medium text-brand-text">1,200 ETB</td>
+                    <td class="px-6 py-4">
+                        <select
+                            class="input bg-brand-dark/50 border-brand-green/50 text-brand-green py-1 px-2 h-7 rounded text-xs">
+                            <option selected>Paid</option>
+                            <option>Processing</option>
+                            <option>Delivered</option>
+                        </select>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="{% url 'dashboard:order_detail' 1042 %}"
+                            class="text-brand-cyan hover:underline rounded bg-brand-cyan/10 px-2.5 py-1 text-xs font-semibold">View</a>
+                    </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr class="hover:bg-brand-border/20 transition-colors bg-brand-dark/30">
+                    <td class="px-6 py-4 font-medium text-brand-text"><a href="#"
+                            class="hover:text-brand-cyan transition-colors">#1041</a></td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2 text-brand-text">
+                            <img src="https://ui-avatars.com/api/?name=Sara+T&background=22d3ee&color=fff"
+                                class="h-6 w-6 rounded-full" alt="">
+                            Sara T.
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">Today, 10:15 AM</td>
+                    <td class="px-6 py-4 font-medium text-brand-text">850 ETB</td>
+                    <td class="px-6 py-4">
+                        <select
+                            class="input bg-brand-dark/50 border-yellow-500/50 text-yellow-500 py-1 px-2 h-7 rounded text-xs">
+                            <option selected>Pending Ref.</option>
+                            <option>Paid</option>
+                            <option>Cancelled</option>
+                        </select>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="#"
+                            class="text-brand-cyan hover:underline rounded bg-brand-cyan/10 px-2.5 py-1 text-xs font-semibold">View</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

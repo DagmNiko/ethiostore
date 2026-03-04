@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # Local apps
     'telegram_bot',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

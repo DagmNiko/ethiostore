@@ -1,0 +1,213 @@
+{% extends 'dashboard/base_marketing.html' %}
+{% load static %}
+
+{% block title %}Pricing - StreamFlow{% endblock %}
+
+{% block content %}
+<div class="bg-brand-dark py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
+            <h2 class="text-base font-semibold leading-7 text-brand-green">Pricing</h2>
+            <p class="mt-2 text-4xl font-bold tracking-tight text-brand-text sm:text-5xl">Scale your Telegram store easily
+            </p>
+        </div>
+        <p class="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-brand-muted">
+            Choose a plan that fits your current volume. You can always upgrade as your store grows.
+        </p>
+
+        <div
+            class="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:gap-x-12">
+
+            <!-- Free Plan -->
+            <div
+                class="rounded-3xl p-8 ring-1 ring-brand-border bg-brand-darker xl:p-10 hover:ring-brand-border/80 transition-shadow transition-colors">
+                <h3 id="tier-free" class="text-lg font-semibold leading-8 text-brand-text">Starter</h3>
+                <p class="mt-4 text-sm leading-6 text-brand-muted">For new sellers and individual hustlers.</p>
+                <p class="mt-6 flex items-baseline gap-x-1">
+                    <span class="text-4xl font-bold tracking-tight text-brand-text">0 ETB</span>
+                    <span class="text-sm font-semibold leading-6 text-brand-muted">/month</span>
+                </p>
+                <a href="{% url 'dashboard:register' %}" aria-describedby="tier-free"
+                    class="btn btn-secondary mt-6 w-full block text-center">Get started free</a>
+                <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-brand-muted">
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Basic posting
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Up to 30 items
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        4 scheduled posts/day
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        5 auto-reposts
+                    </li>
+                    <li class="flex gap-x-3">
+                        <svg class="h-6 w-5 flex-none text-brand-border" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cross-platform posting
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Premium Plan -->
+            <div
+                class="rounded-3xl p-8 ring-2 ring-brand-green bg-brand-dark/50 xl:p-10 relative overflow-hidden shadow-2xl shadow-brand-green/10">
+                <div
+                    class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand-green to-transparent">
+                </div>
+                <div
+                    class="absolute -top-12 -right-12 w-32 h-32 bg-brand-green opacity-20 blur-[50px] pointer-events-none">
+                </div>
+                <h3 id="tier-premium"
+                    class="text-lg font-semibold leading-8 text-brand-green flex items-center justify-between">Premium
+                    <span class="bg-brand-green/20 text-brand-green text-xs rounded-full px-2.5 py-0.5">Most
+                        Popular</span></h3>
+                <p class="mt-4 text-sm leading-6 text-brand-muted">For active small to medium-sized stores.</p>
+                <p class="mt-6 flex items-baseline gap-x-1">
+                    <span class="text-4xl font-bold tracking-tight text-brand-text">500 ETB</span>
+                    <span class="text-sm font-semibold leading-6 text-brand-muted">/month</span>
+                </p>
+                <a href="{% url 'dashboard:register' %}" aria-describedby="tier-premium"
+                    class="btn btn-primary mt-6 w-full block text-center">Upgrade to Premium</a>
+                <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-brand-muted">
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Unlimited Products
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        100 auto-reposts (valid 60 days)
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Advanced scheduling
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-green" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        2 featured posts/week
+                    </li>
+                    <li class="flex gap-x-3">
+                        <svg class="h-6 w-5 flex-none text-brand-border" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cross-platform posting
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Premium+ Plan -->
+            <div
+                class="rounded-3xl p-8 ring-1 ring-brand-cyan/30 bg-brand-darker xl:p-10 relative overflow-hidden group hover:ring-brand-cyan transition-shadow">
+                <div
+                    class="absolute -bottom-12 -left-12 w-32 h-32 bg-brand-cyan opacity-10 group-hover:opacity-20 transition-opacity blur-[50px] pointer-events-none">
+                </div>
+                <h3 id="tier-plus" class="text-lg font-semibold leading-8 text-brand-text">Premium+</h3>
+                <p class="mt-4 text-sm leading-6 text-brand-muted">High-volume and verified merchants.</p>
+                <p class="mt-6 flex items-baseline gap-x-1">
+                    <span class="text-4xl font-bold tracking-tight text-brand-text">Contact Us</span>
+                </p>
+                <a href="{% url 'dashboard:contact' %}" aria-describedby="tier-plus"
+                    class="btn bg-brand-cyan/10 text-brand-cyan hover:bg-brand-cyan/20 mt-6 w-full block text-center border-none">Get
+                    a quote</a>
+                <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-brand-muted">
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-cyan" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cross-platform (IG & FB)
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-cyan" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Unlimited everything
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-cyan" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Custom Store URL
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-cyan" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Dedicated Account Manager
+                    </li>
+                    <li class="flex gap-x-3 text-brand-text">
+                        <svg class="h-6 w-5 flex-none text-brand-cyan" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Priority Support
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

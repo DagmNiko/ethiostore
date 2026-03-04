@@ -1,0 +1,261 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block body %}
+<div x-data="{ sidebarOpen: false }" class="flex h-screen overflow-hidden bg-brand-darker">
+    <!-- Mobile Sidebar Overlay -->
+    <div x-show="sidebarOpen" class="fixed inset-0 z-40 bg-brand-dark/80 backdrop-blur-sm lg:hidden"
+        @click="sidebarOpen = false" x-transition.opacity></div>
+
+    <!-- Sidebar Navigation -->
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+        class="fixed inset-y-0 left-0 z-50 w-64 flex-col border-r border-brand-border bg-brand-dark transition-transform duration-300 lg:static lg:translate-x-0 lg:flex h-full">
+        <!-- Sidebar Header -->
+        <div class="flex h-16 shrink-0 items-center px-6 border-b border-brand-border/50">
+            <a href="{% url 'dashboard:overview' %}" class="flex items-center gap-2">
+                <div
+                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-green shadow-[0_0_15px_rgba(163,230,53,0.3)]">
+                    <svg class="h-5 w-5 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <span class="text-lg font-bold tracking-tight text-brand-text">StreamFlow</span>
+            </a>
+        </div>
+
+        <!-- Tailwind CSS (CDN for Dev) -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            brand: {
+                                dark: 'var(--brand-dark)',
+                                darker: 'var(--brand-darker)',
+                                card: 'var(--brand-card)',
+                                green: 'var(--brand-green)',
+                                cyan: 'var(--brand-cyan)',
+                                text: 'var(--brand-text)',
+                                muted: 'var(--brand-muted)',
+                                border: 'var(--brand-border)'
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['"Space Grotesk"', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+        <style type="text/tailwindcss">
+            @layer base {
+              :root {
+                --brand-dark: #f8fafc;
+                --brand-darker: #f1f5f9;
+                --brand-card: #ffffff;
+                --brand-green: #65a30d;
+                --brand-cyan: #0891b2;
+                --brand-text: #0f172a;
+                --brand-muted: #64748b;
+                --brand-border: #e2e8f0;
+              }
+              .dark {
+                --brand-dark: #090a0f;
+                --brand-darker: #06070a;
+                --brand-card: #12141d;
+                --brand-green: #a3e635;
+                --brand-cyan: #22d3ee;
+                --brand-text: #f8fafc;
+                --brand-muted: #94a3b8;
+                --brand-border: #1e293b;
+              }
+            }
+            @layer components {
+              .card { @apply bg-brand-card border border-brand-border rounded-xl shadow-sm overflow-hidden transition-colors duration-300; }
+              .input { @apply flex h-10 w-full rounded-md border border-brand-border bg-transparent px-3 py-2 text-sm text-brand-text placeholder:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all; }
+              .btn { @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-cyan disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2; }
+              .btn-primary { @apply bg-brand-green text-brand-dark hover:bg-[#b0f53f] font-bold shadow-lg shadow-brand-green/20; }
+              .btn-secondary { @apply bg-brand-border text-brand-text hover:bg-brand-border/80; }
+              .btn-ghost { @apply hover:bg-brand-border hover:text-brand-text; }
+            }
+        </style>
+
+        <!-- Alpine JS -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <!-- Sidebar Links -->
+        <nav class="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
+            <a href="{% url 'dashboard:overview' %}"
+                class="group flex items-center rounded-md px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'overview' %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                </svg>
+                Overview
+            </a>
+
+            <a href="{% url 'dashboard:products' %}"
+                class="group flex items-center rounded-md px-3 py-2 text-sm font-medium {% if 'product' in request.resolver_match.url_name %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                </svg>
+                Products Menu
+            </a>
+
+            <a href="{% url 'dashboard:orders' %}"
+                class="group flex justify-between items-center rounded-md px-3 py-2 text-sm font-medium {% if 'order' in request.resolver_match.url_name %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                <div class="flex items-center">
+                    <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                    Orders
+                </div>
+                <span
+                    class="inline-flex items-center rounded-full bg-brand-green/10 px-2 py-0.5 text-xs font-medium text-brand-green ring-1 ring-inset ring-brand-green/20">3
+                    New</span>
+            </a>
+
+            <a href="{% url 'dashboard:customers' %}"
+                class="group flex items-center rounded-md px-3 py-2 text-sm font-medium {% if 'customer' in request.resolver_match.url_name %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+                CRM
+            </a>
+
+            <a href="{% url 'dashboard:scheduling' %}"
+                class="group flex items-center rounded-md px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'scheduling' %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                </svg>
+                Scheduling
+            </a>
+
+            <div class="pt-6 mt-6 border-t border-brand-border/50">
+                <p class="px-3 text-xs font-semibold text-brand-muted uppercase tracking-wider mb-2">Workspace</p>
+
+                <a href="{% url 'dashboard:billing' %}"
+                    class="group flex justify-between items-center rounded-md px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'billing' %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                    <div class="flex items-center">
+                        <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                        </svg>
+                        Billing
+                    </div>
+                    <span
+                        class="inline-flex items-center rounded-full bg-brand-border px-2 py-0.5 text-xs font-medium text-brand-muted">Free</span>
+                </a>
+
+                <a href="{% url 'dashboard:affiliates' %}"
+                    class="group flex items-center rounded-md px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'affiliates' %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                    <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                    </svg>
+                    Affiliates
+                </a>
+
+                <a href="{% url 'dashboard:settings' %}"
+                    class="group flex items-center rounded-md px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'settings' %}bg-brand-border/50 text-brand-cyan{% else %}text-brand-muted hover:bg-brand-border/30 hover:text-brand-text{% endif %} transition-colors">
+                    <svg class="mr-3 h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Settings
+                </a>
+            </div>
+        </nav>
+
+        <!-- User Profile (Bottom) -->
+        <div class="border-t border-brand-border/50 p-4 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="h-9 w-9 overflow-hidden rounded-full bg-brand-border">
+                    <!-- Placeholder avatar -->
+                    <span
+                        class="flex h-full w-full items-center justify-center text-sm font-medium text-brand-text">S1</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium text-brand-text">Store 101</span>
+                    <span class="text-xs text-brand-muted">@store101bot</span>
+                </div>
+            </a>
+            <!-- Theme Toggle Desktop -->
+            <button @click="theme = theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme)"
+                class="rounded-full p-2 text-brand-muted hover:bg-brand-border/50 hover:text-brand-text focus:outline-none transition-colors"
+                title="Toggle Mode">
+                <svg x-show="theme === 'dark'" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg x-show="theme === 'light'" class="h-5 w-5" style="display:none"
+                    :style="theme === 'light' ? 'display:block' : 'display:none'" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex w-0 flex-1 flex-col overflow-hidden text-brand-text">
+
+        <!-- Mobile Top Navbar -->
+        <div
+            class="relative z-10 flex h-16 shrink-0 lg:hidden items-center justify-between border-b border-brand-border/50 bg-brand-dark px-4">
+            <div class="flex items-center gap-2">
+                <button type="button" @click="sidebarOpen = true" class="text-brand-muted hover:text-brand-text">
+                    <span class="sr-only">Open sidebar</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                    </svg>
+                </button>
+                <!-- Theme Toggle Mobile -->
+                <button @click="theme = theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme)"
+                    class="rounded-full p-2 text-brand-muted hover:bg-brand-border/50 hover:text-brand-text focus:outline-none transition-colors ml-2">
+                    <svg x-show="theme === 'dark'" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg x-show="theme === 'light'" class="h-5 w-5" style="display:none"
+                        :style="theme === 'light' ? 'display:block' : 'display:none'" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="text-lg font-bold tracking-tight text-brand-text flex items-center gap-2">
+                <div class="h-2 w-2 rounded-full bg-brand-green"></div> StreamFlow
+            </div>
+        </div>
+
+        <!-- Page Header (Optional per view) -->
+        <div class="flex-1 overflow-y-auto overflow-x-hidden bg-brand-darker focus:outline-none">
+            <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-10 lg:px-8">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+    </main>
+</div>
+{% endblock %}

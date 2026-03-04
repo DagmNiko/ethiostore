@@ -1,0 +1,217 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-8 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-brand-text">Dashboard Overview</h1>
+        <p class="text-sm text-brand-muted mt-1">Welcome back. Here's what's happening in your store today.</p>
+    </div>
+    <div class="flex gap-3">
+        <select class="input w-auto bg-brand-dark py-1.5 h-9">
+            <option>Today</option>
+            <option>Last 7 Days</option>
+            <option selected>Last 30 Days</option>
+            <option>All Time</option>
+        </select>
+        <button class="btn btn-secondary flex gap-2">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Export
+        </button>
+    </div>
+</div>
+
+<!-- Metric Cards -->
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+    <!-- Active Orders -->
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-brand-muted text-sm">Active Orders</h3>
+            <div class="rounded-lg bg-brand-cyan/10 p-2 text-brand-cyan">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </div>
+        </div>
+        <p class="text-3xl font-bold text-brand-text">24</p>
+        <div class="flex items-center mt-2 text-sm text-brand-green">
+            <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            <span>12% from last week</span>
+        </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-brand-muted text-sm">Total Revenue</h3>
+            <div class="rounded-lg bg-brand-green/10 p-2 text-brand-green">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+        </div>
+        <p class="text-3xl font-bold text-brand-text">45,200 <span class="text-lg text-brand-muted font-normal">ETB</span>
+        </p>
+        <div class="flex items-center mt-2 text-sm text-brand-green">
+            <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            <span>18% from last week</span>
+        </div>
+    </div>
+
+    <!-- Click Through Rate -->
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-brand-muted text-sm">Engagement Rate</h3>
+            <div class="rounded-lg bg-indigo-500/10 p-2 text-indigo-400">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+            </div>
+        </div>
+        <p class="text-3xl font-bold text-brand-text">8.4%</p>
+        <div class="flex items-center mt-2 text-sm text-red-500">
+            <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+            <span>2% from last week</span>
+        </div>
+    </div>
+
+    <!-- Bot Status -->
+    <div class="card p-6 border-l-4 border-l-brand-green">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-brand-muted text-sm">Bot Status</h3>
+            <div class="relative flex h-3 w-3">
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-green"></span>
+            </div>
+        </div>
+        <p class="text-xl font-bold text-brand-text mt-1">Operational</p>
+        <p class="text-sm text-brand-muted mt-2">Next auto-post in <span class="text-brand-text font-medium">45m</span></p>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <!-- Chart Placeholder -->
+    <div class="card lg:col-span-2 p-6 flex flex-col">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-medium text-brand-text text-lg">Revenue Overview</h3>
+        </div>
+        <div class="flex-grow flex items-end gap-2 h-64 border-b border-l border-brand-border/50 pb-2 pl-2">
+            <!-- Simulated Bar Chart -->
+            <div
+                class="w-full bg-brand-green/20 hover:bg-brand-green/40 transition-colors rounded-t h-[40%] relative group">
+                <div
+                    class="absolute -top-8 left-1/2 -translate-x-1/2 bg-brand-dark px-2 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    12k</div>
+            </div>
+            <div
+                class="w-full bg-brand-cyan/20 hover:bg-brand-cyan/40 transition-colors rounded-t h-[55%] relative group">
+            </div>
+            <div
+                class="w-full bg-brand-green/20 hover:bg-brand-green/40 transition-colors rounded-t h-[30%] relative group">
+            </div>
+            <div
+                class="w-full bg-brand-cyan/20 hover:bg-brand-cyan/40 transition-colors rounded-t h-[70%] relative group">
+            </div>
+            <div
+                class="w-full bg-brand-green/20 hover:bg-brand-green/40 transition-colors rounded-t h-[85%] relative group">
+            </div>
+            <div
+                class="w-full bg-brand-cyan/20 hover:bg-brand-cyan/40 transition-colors rounded-t h-[60%] relative group">
+            </div>
+            <div
+                class="w-full bg-brand-green/80 hover:bg-brand-green transition-colors rounded-t h-[95%] relative group">
+                <div
+                    class="absolute -top-8 left-1/2 -translate-x-1/2 bg-brand-dark px-2 py-1 text-xs rounded text-brand-text shadow shadow-black/50 border border-brand-border z-10">
+                    45k</div>
+            </div>
+        </div>
+        <div class="flex justify-between mt-2 text-xs text-brand-muted pl-2">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-medium text-brand-text text-lg">Recent Orders</h3>
+            <a href="{% url 'dashboard:orders' %}" class="text-sm text-brand-cyan hover:underline">View all</a>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Order Item -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="h-10 w-10 rounded-lg bg-brand-dark flex items-center justify-center border border-brand-border">
+                        <span class="text-brand-text text-sm font-semibold">BK</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-brand-text">Bemenet K.</p>
+                        <p class="text-xs text-brand-muted">Order #1042 • 2 items</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-semibold text-brand-text">1,200 ETB</p>
+                    <p class="text-xs text-brand-green">Paid</p>
+                </div>
+            </div>
+
+            <!-- Order Item -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="h-10 w-10 rounded-lg bg-brand-dark flex items-center justify-center border border-brand-border">
+                        <img src="https://ui-avatars.com/api/?name=Sara+T&background=22d3ee&color=fff"
+                            class="rounded-lg h-full w-full" alt="">
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-brand-text">Sara T.</p>
+                        <p class="text-xs text-brand-muted">Order #1041 • 1 item</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-semibold text-brand-text">850 ETB</p>
+                    <p class="text-xs text-yellow-500">Pending Ref.</p>
+                </div>
+            </div>
+
+            <!-- Order Item -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="h-10 w-10 rounded-lg bg-brand-dark flex items-center justify-center border border-brand-border">
+                        <span class="text-brand-text text-sm font-semibold">DT</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-brand-text">Dagmawi T.</p>
+                        <p class="text-xs text-brand-muted">Order #1040 • 4 items</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-semibold text-brand-text">3,400 ETB</p>
+                    <p class="text-xs text-brand-green">Delivered</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

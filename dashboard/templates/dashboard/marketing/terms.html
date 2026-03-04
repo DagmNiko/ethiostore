@@ -1,0 +1,32 @@
+{% extends 'dashboard/base_marketing.html' %}
+{% load static %}
+
+{% block title %}Terms of Service - StreamFlow{% endblock %}
+
+{% block content %}
+<div class="bg-brand-dark py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8">
+        <div class="text-base leading-7 text-brand-muted">
+            <h1 class="text-3xl font-bold tracking-tight text-brand-text mb-8">Terms of Service</h1>
+            <p class="mb-4 text-sm">Last Updated: February 23, 2026</p>
+
+            <div class="prose prose-invert max-w-none">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing or using StreamFlow's web dashboard and Telegram bot services, you agree to be bound by
+                    these Terms of Service. If you disagree with any part of these terms, you may not access the
+                    service.</p>
+
+                <h3>2. Prohibited Content</h3>
+                <p>Merchant accounts found selling illegal goods, facilitating fraud, or violating Telegram's core
+                    acceptable use policies will be immediately terminated without refund. StreamFlow acts as a
+                    processing intermediary and does not claim ownership of merchant inventory.</p>
+
+                <h3>3. Subscription and Billing</h3>
+                <p>Services are billed on a subscription basis. You will be billed in advance on a recurring schedule.
+                    You can cancel your subscription at any time through the billing dashboard, but no refunds will be
+                    provided for partial months.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-2xl font-bold text-brand-text">Automated Posting</h1>
+    <p class="text-sm text-brand-muted mt-1">Schedule when your products are automatically sent to your Telegram
+        channels.</p>
+</div>
+
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <!-- Left Column: Scheduler Configuration -->
+    <div class="lg:col-span-2 space-y-8">
+
+        <!-- Post Frequency -->
+        <div class="card p-6">
+            <div class="flex items-center justify-between mb-6 border-b border-brand-border/50 pb-4">
+                <h2 class="text-lg font-semibold text-brand-text">Posting Schedule</h2>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-brand-muted">Status:</span>
+                    <span
+                        class="inline-flex items-center rounded-md bg-brand-green/10 px-2 py-1 text-xs font-medium text-brand-green ring-1 ring-inset ring-brand-green/20">Active</span>
+                </div>
+            </div>
+
+            <form action="#" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium leading-6 text-brand-text mb-2">How often should the bot
+                        post?</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label
+                            class="relative flex cursor-pointer rounded-lg border bg-brand-dark p-4 shadow-sm focus:outline-none border-brand-green ring-1 ring-brand-green">
+                            <input type="radio" name="frequency" value="1h" class="sr-only"
+                                aria-labelledby="freq-1-label" checked>
+                            <span class="flex flex-1">
+                                <span class="flex flex-col">
+                                    <span id="freq-1-label" class="block text-sm font-medium text-brand-text">Every 1
+                                        Hour</span>
+                                    <span class="mt-1 flex items-center text-xs text-brand-muted">High volume</span>
+                                </span>
+                            </span>
+                            <svg class="h-5 w-5 text-brand-green" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </label>
+
+                        <label
+                            class="relative flex cursor-pointer rounded-lg border border-brand-border bg-brand-dark p-4 shadow-sm focus:outline-none hover:border-brand-muted/50 transition-colors">
+                            <input type="radio" name="frequency" value="3h" class="sr-only"
+                                aria-labelledby="freq-2-label">
+                            <span class="flex flex-1">
+                                <span class="flex flex-col">
+                                    <span id="freq-2-label" class="block text-sm font-medium text-brand-text">Every 3
+                                        Hours</span>
+                                    <span class="mt-1 flex items-center text-xs text-brand-muted">Recommended</span>
+                                </span>
+                            </span>
+                        </label>
+
+                        <label
+                            class="relative flex cursor-pointer rounded-lg border border-brand-border bg-brand-dark p-4 shadow-sm focus:outline-none hover:border-brand-muted/50 transition-colors">
+                            <input type="radio" name="frequency" value="custom" class="sr-only"
+                                aria-labelledby="freq-3-label">
+                            <span class="flex flex-1">
+                                <span class="flex flex-col">
+                                    <span id="freq-3-label" class="block text-sm font-medium text-brand-text">Custom
+                                        Times</span>
+                                    <span class="mt-1 flex items-center text-xs text-brand-muted">Specific hours</span>
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="border-t border-brand-border/50 pt-6">
+                    <label class="block text-sm font-medium leading-6 text-brand-text mb-2">Quiet Hours</label>
+                    <p class="text-xs text-brand-muted mb-4">The bot will not post during these hours to avoid
+                        disturbing subscribers.</p>
+
+                    <div class="flex items-center gap-4">
+                        <div class="flex-1">
+                            <span class="block text-xs text-brand-muted mb-1">From</span>
+                            <input type="time" class="input focus:ring-brand-green" value="22:00">
+                        </div>
+                        <div class="flex-1">
+                            <span class="block text-xs text-brand-muted mb-1">To</span>
+                            <input type="time" class="input focus:ring-brand-green" value="08:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button type="submit" class="btn btn-primary">Save Schedule</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Content Selection -->
+        <div class="card p-6">
+            <h2 class="text-lg font-semibold text-brand-text mb-6 border-b border-brand-border/50 pb-4">Content Selection
+            </h2>
+            <p class="text-sm text-brand-muted mb-6">Determine which products the bot pulls from when auto-posting.</p>
+
+            <div class="space-y-4">
+                <label
+                    class="flex items-center justify-between cursor-pointer rounded-lg border border-brand-border p-4 hover:bg-brand-dark transition-colors">
+                    <div>
+                        <span class="text-sm font-medium text-brand-text">Newest First</span>
+                        <p class="text-xs text-brand-muted mt-1">Post recently added products that haven't been posted
+                            yet.</p>
+                    </div>
+                    <input type="radio" name="content_rule" value="newest" checked
+                        class="h-4 w-4 text-brand-green bg-brand-dark border-brand-border focus:ring-brand-green">
+                </label>
+
+                <label
+                    class="flex items-center justify-between cursor-pointer rounded-lg border border-brand-border p-4 hover:bg-brand-dark transition-colors">
+                    <div>
+                        <span class="text-sm font-medium text-brand-text">Random Rotation</span>
+                        <p class="text-xs text-brand-muted mt-1">Randomly select from all active inventory.</p>
+                    </div>
+                    <input type="radio" name="content_rule" value="random"
+                        class="h-4 w-4 text-brand-green bg-brand-dark border-brand-border focus:ring-brand-green">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Queue & Preview -->
+    <div class="space-y-8">
+        <!-- Upcoming Queue -->
+        <div class="card p-6">
+            <div class="flex items-center justify-between mb-6 border-b border-brand-border/50 pb-4">
+                <h2 class="text-lg font-semibold text-brand-text">Up Next</h2>
+                <button class="text-xs text-brand-cyan hover:underline font-medium">Clear Queue</button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Queue Item -->
+                <div class="flex gap-4">
+                    <div class="h-12 w-12 flex-shrink-0 rounded bg-brand-border/50 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100&h=100&fit=crop" alt=""
+                            class="h-full w-full object-cover">
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-brand-text line-clamp-1">Nike Air Max 270</p>
+                        <p class="text-xs text-brand-muted mt-1 flex items-center gap-1">
+                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            In 45 mins
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Queue Item -->
+                <div class="flex gap-4">
+                    <div class="h-12 w-12 flex-shrink-0 rounded bg-brand-border/50 overflow-hidden"></div>
+                    <div>
+                        <p class="text-sm font-medium text-brand-text line-clamp-1">Leather Crossbody Bag</p>
+                        <p class="text-xs text-brand-muted mt-1 flex items-center gap-1">
+                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            In 1h 45m
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="mt-6 w-full btn btn-secondary text-xs">View Full Queue</button>
+        </div>
+
+        <!-- Target Channels -->
+        <div class="card p-6">
+            <div class="flex items-center justify-between mb-6 border-b border-brand-border/50 pb-4">
+                <h2 class="text-lg font-semibold text-brand-text">Target Channels</h2>
+                <button class="text-xs text-brand-cyan hover:underline font-medium">Manage</button>
+            </div>
+            <ul role="list" class="divide-y divide-brand-border/30">
+                <li class="flex items-center justify-between py-3">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="h-8 w-8 rounded-full bg-[#2AABEE]/20 text-[#2AABEE] flex items-center justify-center border border-[#2AABEE]/50">
+                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-brand-text">@addis_fashion</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

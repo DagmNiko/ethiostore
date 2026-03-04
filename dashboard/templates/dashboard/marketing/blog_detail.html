@@ -1,0 +1,70 @@
+{% extends 'dashboard/base_marketing.html' %}
+{% load static %}
+
+{% block title %}Optimizing Images for Telegram - StreamFlow{% endblock %}
+
+{% block content %}
+<div class="bg-brand-dark px-6 py-24 sm:py-32 lg:px-8">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-brand-muted">
+        <p class="text-base font-semibold leading-7 text-brand-green">Guides</p>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-brand-text sm:text-4xl">How to Optimize Images for Telegram
+            Stores</h1>
+        <p class="mt-6 text-xl leading-8">Telegram loads images differently than a standard web browser. If your product
+            photos are too large, customers on slow mobile connections might scroll past before seeing what you're
+            selling. Here is the definitive guide to image optimization for StreamFlow bots.</p>
+
+        <!-- Hero Image Placeholder -->
+        <figure class="mt-10">
+            <div
+                class="aspect-video rounded-xl bg-brand-border/30 flex items-center justify-center overflow-hidden border border-brand-green/20">
+                <svg class="w-16 h-16 text-brand-green/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                </svg>
+            </div>
+            <figcaption class="mt-4 flex gap-x-2 text-sm leading-6 text-brand-muted">
+                <svg class="mt-0.5 h-5 w-5 flex-none text-brand-border" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clip-rule="evenodd" />
+                </svg>
+                Optimal aspect ratios for Telegram Inline bots.
+            </figcaption>
+        </figure>
+
+        <div class="mt-10 max-w-2xl text-lg text-brand-text">
+            <h2 class="text-2xl font-bold tracking-tight text-brand-text mb-4">1. Stick to 1:1 or 4:5 Ratios</h2>
+            <p class="mb-6">Telegram heavily compresses and crops images in the chat feed to maximize vertical space.
+                While landscape images work fine on desktop, the vast majority of your buyers are on mobile. Square
+                (1:1) or slightly vertical (4:5) images take up the most screen real estate without being aggressively
+                cropped by the Telegram client.</p>
+
+            <h2 class="text-2xl font-bold tracking-tight text-brand-text mb-4">2. Keep Sizes Under 300KB</h2>
+            <p class="mb-6">Network speeds fluctuate. A 2MB photograph looks stunning, but your customer might abandon
+                the queue if it takes 5 seconds to load. Use tools like TinyPNG or Squash to compress your JPEGs down to
+                150-300KB. StreamFlow automatically handles basic compression, but pre-compressing guarantees the
+                sharpest results.</p>
+
+            <div class="rounded-xl bg-brand-darker p-6 border border-brand-cyan/30 my-8 shadow-inner">
+                <h3 class="flex items-center gap-2 text-brand-cyan font-bold mb-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Pro Tip: Text in Images
+                </h3>
+                <p class="text-sm text-brand-muted m-0">Avoid putting critical text (like prices or sizes) in the image
+                    itself. If Telegram compresses the preview, the text becomes unreadable. Put all essential details
+                    in the post caption via the StreamFlow product description field.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold tracking-tight text-brand-text mb-4">3. High Contrast Backgrounds</h2>
+            <p class="mb-6">Because Telegram has both Light and Dark mode, your products need to pop regardless of the
+                user's theme. A clean, slightly off-white (#F5F5F5) or completely transparent background ensures your
+                product is the absolute focal point.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

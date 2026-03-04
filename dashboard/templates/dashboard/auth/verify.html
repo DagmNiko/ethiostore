@@ -1,0 +1,71 @@
+{% extends 'dashboard/base_auth.html' %}
+{% load static %}
+
+{% block title %}Verify Phone - StreamFlow{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="text-3xl font-bold tracking-tight text-brand-text mb-2">Check your messages</h2>
+    <p class="text-sm text-brand-muted mb-8">We sent a 6-digit code to <span class="text-brand-text font-medium">+251 911 ***
+            567</span>.</p>
+</div>
+
+<div class="mt-10">
+    <form action="{% url 'dashboard:overview' %}" method="POST" class="space-y-6">
+
+        <div>
+            <label for="code_1" class="sr-only">Verification Code</label>
+            <div class="flex justify-between gap-2">
+                <input type="text" maxlength="1" id="code_1"
+                    class="w-12 h-14 text-center text-2xl font-bold input border-brand-border focus:border-brand-green focus:ring-brand-green bg-brand-darker rounded-xl"
+                    placeholder="•" autofocus>
+                <input type="text" maxlength="1" id="code_2"
+                    class="w-12 h-14 text-center text-2xl font-bold input border-brand-border focus:border-brand-green focus:ring-brand-green bg-brand-darker rounded-xl"
+                    placeholder="•">
+                <input type="text" maxlength="1" id="code_3"
+                    class="w-12 h-14 text-center text-2xl font-bold input border-brand-border focus:border-brand-green focus:ring-brand-green bg-brand-darker rounded-xl"
+                    placeholder="•">
+                <input type="text" maxlength="1" id="code_4"
+                    class="w-12 h-14 text-center text-2xl font-bold input border-brand-border focus:border-brand-green focus:ring-brand-green bg-brand-darker rounded-xl"
+                    placeholder="•">
+                <input type="text" maxlength="1" id="code_5"
+                    class="w-12 h-14 text-center text-2xl font-bold input border-brand-border focus:border-brand-green focus:ring-brand-green bg-brand-darker rounded-xl"
+                    placeholder="•">
+                <input type="text" maxlength="1" id="code_6"
+                    class="w-12 h-14 text-center text-2xl font-bold input border-brand-border focus:border-brand-green focus:ring-brand-green bg-brand-darker rounded-xl"
+                    placeholder="•">
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <!-- Formats as a button leading to Dashboard to simulate successful login -->
+            <button type="submit" class="btn btn-primary w-full">Verify & Continue</button>
+        </div>
+    </form>
+
+    <p class="mt-8 text-center text-sm text-brand-muted">
+        Didn't receive the code?
+        <a href="#" class="font-semibold leading-6 text-brand-cyan hover:text-brand-green transition-colors">Resend via
+            Telegram</a>
+        or
+        <a href="#" class="font-semibold leading-6 text-brand-cyan hover:text-brand-green transition-colors">SMS</a>
+    </p>
+
+    <!-- Auto-focus script for OTP inputs -->
+    <script>
+        const inputs = document.querySelectorAll('input[id^="code_"]');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</div>
+{% endblock %}

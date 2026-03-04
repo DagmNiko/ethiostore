@@ -1,0 +1,116 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-2xl font-bold text-brand-text">Customers (CRM)</h1>
+    <p class="text-sm text-brand-muted mt-1">Manage and view histories of users who have interacted with your bot.</p>
+</div>
+
+<div class="card">
+    <div class="border-b border-brand-border/50 p-4 sm:flex sm:items-center sm:justify-between gap-4">
+        <div class="relative max-w-sm flex-grow">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg class="h-4 w-4 text-brand-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <input type="text" class="input pl-10" placeholder="Search by name, handle, or phone...">
+        </div>
+        <div class="mt-4 sm:mt-0 flex gap-2">
+            <button class="btn btn-secondary flex gap-2">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                </svg>
+                Filter
+            </button>
+            <button class="btn btn-secondary flex gap-2">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Export CSV
+            </button>
+        </div>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-brand-muted">
+            <thead class="bg-brand-darker text-xs uppercase text-brand-muted border-b border-brand-border/50">
+                <tr>
+                    <th scope="col" class="px-6 py-4 font-medium">Customer</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Contact</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Total Orders</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Total Spent</th>
+                    <th scope="col" class="px-6 py-4 font-medium">Last Active</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-brand-border/50">
+                <!-- Row 1 -->
+                <tr class="hover:bg-brand-border/20 transition-colors cursor-pointer"
+                    onclick="window.location='{% url 'dashboard:customer_profile' 1 %}'">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3 text-brand-text">
+                            <div
+                                class="h-8 w-8 rounded-full bg-brand-green/20 text-brand-green border border-brand-green/50 flex flex-shrink-0 items-center justify-center font-bold text-xs">
+                                BK</div>
+                            <div>
+                                <div class="font-medium text-brand-text hover:text-brand-cyan transition-colors">Bemenet K.
+                                </div>
+                                <div class="text-xs text-brand-muted">@bemenet_k</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-brand-text">+251 911 234 567</td>
+                    <td class="px-6 py-4 text-brand-text">4</td>
+                    <td class="px-6 py-4 text-brand-green font-medium">4,500 ETB</td>
+                    <td class="px-6 py-4">Today</td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr class="hover:bg-brand-border/20 transition-colors cursor-pointer"
+                    onclick="window.location='{% url 'dashboard:customer_profile' 2 %}'">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3 text-brand-text">
+                            <img src="https://ui-avatars.com/api/?name=Sara+T&background=22d3ee&color=fff"
+                                class="h-8 w-8 flex-shrink-0 rounded-full" alt="">
+                            <div>
+                                <div class="font-medium text-brand-text hover:text-brand-cyan transition-colors">Sara T.
+                                </div>
+                                <div class="text-xs text-brand-muted">@sara_t</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-brand-text">+251 922 345 678</td>
+                    <td class="px-6 py-4 text-brand-text">1</td>
+                    <td class="px-6 py-4 text-brand-green font-medium">850 ETB</td>
+                    <td class="px-6 py-4">3 Days Ago</td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr class="hover:bg-brand-border/20 transition-colors cursor-pointer"
+                    onclick="window.location='{% url 'dashboard:customer_profile' 3 %}'">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3 text-brand-text">
+                            <div
+                                class="h-8 w-8 rounded-full bg-brand-border flex-shrink-0 border flex items-center justify-center font-bold text-xs border-brand-border">
+                                DT</div>
+                            <div>
+                                <div class="font-medium text-brand-text hover:text-brand-cyan transition-colors">Dagmawi T.
+                                </div>
+                                <div class="text-xs text-brand-muted">@dagmawi_t99</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-brand-muted italic">Not provided</td>
+                    <td class="px-6 py-4 text-brand-text">0</td>
+                    <td class="px-6 py-4 text-brand-muted">0 ETB</td>
+                    <td class="px-6 py-4">1 Week Ago</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

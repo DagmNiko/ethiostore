@@ -1,0 +1,31 @@
+{% extends 'dashboard/base_marketing.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - StreamFlow{% endblock %}
+
+{% block content %}
+<div class="bg-brand-dark py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8">
+        <div class="text-base leading-7 text-brand-muted">
+            <h1 class="text-3xl font-bold tracking-tight text-brand-text mb-8">Privacy Policy</h1>
+            <p class="mb-4 text-sm">Last Updated: February 23, 2026</p>
+
+            <div class="prose prose-invert max-w-none">
+                <h3>1. Data We Collect</h3>
+                <p>We collect information you provide directly to us (such as store names, emails, and payment info) and
+                    data automatically collected when interacting with our bot (such as Telegram User IDs, timestamps,
+                    and order histories).</p>
+
+                <h3>2. How We Use Your Data</h3>
+                <p>Your data is used exclusively to operate, maintain, and improve the StreamFlow service. We act as
+                    data processors for the buyer data you collect; you retain ownership of your customer list (CRM).
+                </p>
+
+                <h3>3. Data Security</h3>
+                <p>We implement commercially reasonable security measures to protect your data, utilizing encrypted
+                    PostgreSQL databases on secure servers. However, no internet transmission is 100% secure.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'dashboard/base_marketing.html' %}
+{% load static %}
+
+{% block title %}FAQ - StreamFlow{% endblock %}
+
+{% block content %}
+<div class="bg-brand-dark py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl divide-y divide-brand-border/50">
+            <h2 class="text-3xl font-bold tracking-tight text-brand-text sm:text-4xl mb-10 text-center">Frequently Asked
+                Questions</h2>
+
+            <dl class="mt-10 space-y-6 divide-y divide-brand-border/50" x-data="{ active: null }">
+
+                <!-- Accordion Item 1 -->
+                <div class="pt-6">
+                    <dt>
+                        <button type="button"
+                            class="flex w-full items-start justify-between text-left text-brand-text focus:outline-none"
+                            @click="active !== 1 ? active = 1 : active = null">
+                            <span class="text-lg font-semibold leading-7">Do I need a separate phone number for the
+                                bot?</span>
+                            <span class="ml-6 flex h-7 items-center transition-transform"
+                                :class="active === 1 ? 'rotate-180 text-brand-green' : 'text-brand-muted'">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-4 pr-12 text-brand-muted overflow-hidden transition-all duration-300"
+                        x-show="active === 1" x-collapse>
+                        <p class="text-base leading-7">No, the bot operates independently via a unique bot token
+                            provided by Telegram's BotFather. Your personal phone number remains completely private and
+                            is not linked to the store's public profile.</p>
+                    </dd>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="pt-6">
+                    <dt>
+                        <button type="button"
+                            class="flex w-full items-start justify-between text-left text-brand-text focus:outline-none"
+                            @click="active !== 2 ? active = 2 : active = null">
+                            <span class="text-lg font-semibold leading-7">How do customers pay via Telebirr or
+                                Chapa?</span>
+                            <span class="ml-6 flex h-7 items-center transition-transform"
+                                :class="active === 2 ? 'rotate-180 text-brand-green' : 'text-brand-muted'">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-4 pr-12 text-brand-muted overflow-hidden transition-all duration-300"
+                        x-show="active === 2" x-collapse>
+                        <p class="text-base leading-7">When a customer clicks "Order" in Telegram, they are presented
+                            with an Inline Web App or a direct payment link depending on your configuration. If you link
+                            your merchant APIs in the dashboard, payments are verified instantly and the order status
+                            updates to 'Paid'.</p>
+                    </dd>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="pt-6">
+                    <dt>
+                        <button type="button"
+                            class="flex w-full items-start justify-between text-left text-brand-text focus:outline-none"
+                            @click="active !== 3 ? active = 3 : active = null">
+                            <span class="text-lg font-semibold leading-7">Can I manage multiple channels with one
+                                StreamFlow account?</span>
+                            <span class="ml-6 flex h-7 items-center transition-transform"
+                                :class="active === 3 ? 'rotate-180 text-brand-green' : 'text-brand-muted'">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </button>
+                    </dt>
+                    <dd class="mt-4 pr-12 text-brand-muted overflow-hidden transition-all duration-300"
+                        x-show="active === 3" x-collapse>
+                        <p class="text-base leading-7">Yes, our Premium tier allows you to deploy the same inventory and
+                            bot across multiple Telegram channels (e.g., a men's channel and a women's channel) while
+                            managing all orders from a single, unified dashboard.</p>
+                    </dd>
+                </div>
+
+            </dl>
+        </div>
+    </div>
+</div>
+{% endblock %}

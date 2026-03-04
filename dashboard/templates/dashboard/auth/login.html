@@ -1,0 +1,95 @@
+{% extends 'dashboard/base_auth.html' %}
+{% load static %}
+
+{% block title %}Sign In - StreamFlow{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="text-3xl font-bold tracking-tight text-brand-text mb-2">Welcome back</h2>
+    <p class="text-sm text-brand-muted mb-8">Sign in to your StreamFlow merchant dashboard.</p>
+</div>
+
+<div class="mt-10">
+    <form action="" method="POST" class="space-y-6">
+        {% csrf_token %}
+
+        {% if messages %}
+        <div class="rounded-md bg-red-500/10 p-4 mb-6 ring-1 ring-inset ring-red-500/20">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-400">Error</h3>
+                    <div class="mt-2 text-sm text-red-400/80">
+                        <ul role="list" class="list-disc space-y-1 pl-5">
+                            {% for message in messages %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div>
+            <label for="username" class="block text-sm font-medium leading-6 text-brand-text">Username</label>
+            <div class="mt-2">
+                <input id="username" name="username" type="text" autocomplete="username" required class="input">
+            </div>
+        </div>
+
+        <div>
+            <div class="flex items-center justify-between">
+                <label for="password" class="block text-sm font-medium leading-6 text-brand-text">Password</label>
+                <div class="text-sm">
+                    <a href="#" class="font-semibold text-brand-green hover:text-brand-cyan transition-colors">Forgot
+                        password?</a>
+                </div>
+            </div>
+            <div class="mt-2">
+                <input id="password" name="password" type="password" autocomplete="current-password" required
+                    class="input">
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary w-full">Sign in</button>
+        </div>
+    </form>
+
+    <div class="mt-8">
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-brand-border/50"></div>
+            </div>
+            <div class="relative flex justify-center text-sm font-medium leading-6">
+                <span class="bg-brand-dark px-6 text-brand-muted">Or continue with</span>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <a href="#"
+                class="flex w-full items-center justify-center gap-3 rounded-md bg-[#2AABEE] px-3 py-2 text-sm font-semibold text-brand-text shadow-sm hover:bg-[#229ED9] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2AABEE]">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+                </svg>
+                <span class="text-sm font-semibold leading-6">Login with Telegram</span>
+            </a>
+        </div>
+    </div>
+
+    <p class="mt-10 text-center text-sm text-brand-muted">
+        Not a member?
+        <a href="{% url 'dashboard:register' %}"
+            class="font-semibold leading-6 text-brand-green hover:text-brand-cyan transition-colors">Start a 14-day free
+            trial</a>
+    </p>
+</div>
+{% endblock %}

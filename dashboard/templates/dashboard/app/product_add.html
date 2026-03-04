@@ -1,0 +1,140 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-8">
+    <div class="flex items-center gap-2 mb-2 text-sm text-brand-muted">
+        <a href="{% url 'dashboard:products' %}" class="hover:text-brand-text transition-colors">Products</a>
+        <span>/</span>
+        <span class="text-brand-text">Add New Product</span>
+    </div>
+    <h1 class="text-2xl font-bold text-brand-text">Create Product</h1>
+</div>
+
+<form action="#" method="POST" class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <!-- Left Column: Details -->
+    <div class="lg:col-span-2 space-y-8">
+        <!-- General Info -->
+        <div class="card p-6">
+            <h2 class="text-lg font-semibold text-brand-text mb-6 border-b border-brand-border/50 pb-4">General Information
+            </h2>
+
+            <div class="space-y-6">
+                <div>
+                    <label for="title" class="block text-sm font-medium leading-6 text-brand-text mb-2">Product Title</label>
+                    <input type="text" id="title" name="title" class="input focus:ring-brand-green"
+                        placeholder="e.g. Nike Air Force 1">
+                </div>
+
+                <div>
+                    <label for="description" class="block text-sm font-medium leading-6 text-brand-text mb-2">Caption /
+                        Description</label>
+                    <textarea id="description" name="description" rows="5"
+                        class="input h-auto resize-none focus:ring-brand-green"
+                        placeholder="This will be the text sent in the Telegram message..."></textarea>
+                    <p class="mt-2 text-xs text-brand-muted">Markdown is supported. URLs will be linked automatically.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing & Inventory -->
+        <div class="card p-6">
+            <h2 class="text-lg font-semibold text-brand-text mb-6 border-b border-brand-border/50 pb-4">Pricing & Inventory
+            </h2>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div>
+                    <label for="price" class="block text-sm font-medium leading-6 text-brand-text mb-2">Price (ETB)</label>
+                    <div class="relative">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span class="text-brand-muted sm:text-sm">ብር</span>
+                        </div>
+                        <input type="number" name="price" id="price" class="input pl-10 focus:ring-brand-green"
+                            placeholder="0.00">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="compare_price" class="block text-sm font-medium leading-6 text-brand-text mb-2">Compare at
+                        Price (Optional)</label>
+                    <div class="relative">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span class="text-brand-muted sm:text-sm">ብር</span>
+                        </div>
+                        <input type="number" name="compare_price" id="compare_price"
+                            class="input pl-10 focus:ring-brand-green" placeholder="0.00">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="sku" class="block text-sm font-medium leading-6 text-brand-text mb-2">SKU (Stock Keeping
+                        Unit)</label>
+                    <input type="text" name="sku" id="sku" class="input focus:ring-brand-green"
+                        placeholder="e.g. NK-AF1-BLK">
+                </div>
+
+                <div>
+                    <label for="stock" class="block text-sm font-medium leading-6 text-brand-text mb-2">Stock
+                        Quantity</label>
+                    <input type="number" name="stock" id="stock" class="input focus:ring-brand-green" value="1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Media & Publish -->
+    <div class="space-y-8">
+        <!-- Media Upload -->
+        <div class="card p-6">
+            <h2 class="text-lg font-semibold text-brand-text mb-6 border-b border-brand-border/50 pb-4">Media</h2>
+
+            <div
+                class="flex justify-center rounded-xl border border-dashed border-brand-border hover:border-brand-green/50 bg-brand-dark px-6 py-10 transition-colors">
+                <div class="text-center">
+                    <svg class="mx-auto h-12 w-12 text-brand-muted mb-4" viewBox="0 0 24 24" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div class="mt-4 flex text-sm leading-6 justify-center">
+                        <label for="file-upload"
+                            class="relative cursor-pointer rounded-md bg-transparent font-semibold text-brand-green hover:text-brand-cyan transition-colors">
+                            <span>Upload a file</span>
+                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                        </label>
+                        <p class="pl-1 text-brand-muted">or drag and drop</p>
+                    </div>
+                    <p class="text-xs leading-5 text-brand-muted mt-2">PNG, JPG, GIF up to 5MB</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Publishing Status -->
+        <div class="card p-6">
+            <h2 class="text-lg font-semibold text-brand-text mb-6 border-b border-brand-border/50 pb-4">Publishing</h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium leading-6 text-brand-text mb-2">Status</label>
+                    <select class="input bg-brand-dark focus:ring-brand-green">
+                        <option>Active / Published</option>
+                        <option>Draft</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center gap-2 pt-4 border-t border-brand-border/50">
+                    <input id="auto_post" name="auto_post" type="checkbox" checked
+                        class="h-4 w-4 rounded border-brand-border bg-transparent text-brand-green focus:ring-brand-cyan">
+                    <label for="auto_post" class="text-sm font-medium text-brand-text">Post to Telegram immediately</label>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" class="btn btn-primary w-full">Save Product</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

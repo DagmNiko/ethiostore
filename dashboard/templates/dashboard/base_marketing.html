@@ -1,0 +1,144 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block body %}
+<!-- Navbar -->
+<nav
+    class="sticky top-0 z-50 w-full border-b border-brand-border/50 bg-brand-dark/80 backdrop-blur-md transition-all duration-300">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+            <a href="{% url 'dashboard:home' %}" class="flex items-center gap-2 transition-opacity hover:opacity-80">
+                <div
+                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-green to-brand-cyan shadow-lg shadow-brand-green/20">
+                    <svg class="h-5 w-5 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-brand-text">StreamFlow</span>
+            </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex md:items-center md:gap-8">
+            <a href="{% url 'dashboard:product_detail' %}"
+                class="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Platform</a>
+            <a href="{% url 'dashboard:features' %}"
+                class="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Features</a>
+            <a href="{% url 'dashboard:pricing' %}"
+                class="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Pricing</a>
+            <a href="{% url 'dashboard:blog_hub' %}"
+                class="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Resources</a>
+        </div>
+
+        <!-- Custom CSS (Alpine, Utilities) -->
+
+        <!-- Alpine JS -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <!-- CTA Buttons -->
+        <div class="flex items-center gap-4">
+            <!-- Theme Toggle -->
+            <button @click="theme = theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme)"
+                class="rounded-full p-2 text-brand-muted hover:bg-brand-border/50 hover:text-brand-text focus:outline-none transition-colors">
+                <svg x-show="theme === 'dark'" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg x-show="theme === 'light'" x-cloak class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+
+            <a href="{% url 'dashboard:login' %}"
+                class="hidden text-sm font-medium text-brand-muted transition-colors hover:text-brand-text md:block">Log
+                in</a>
+            <a href="{% url 'dashboard:register' %}" class="btn btn-primary hidden md:inline-flex">Get Started Free</a>
+
+            <!-- Mobile Menu Button (Alpine) -->
+            <button x-data="{ open: false }" @click="open = !open" type="button"
+                class="inline-flex items-center justify-center rounded-md p-2 text-brand-muted hover:bg-brand-border/50 hover:text-brand-text md:hidden">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="flex-grow">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-brand-border/50 bg-brand-darker py-12 md:py-16 mt-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
+            <div class="col-span-2 lg:col-span-2">
+                <a href="{% url 'dashboard:home' %}" class="flex items-center gap-2 mb-4">
+                    <div class="flex h-6 w-6 items-center justify-center rounded-md bg-brand-green">
+                        <svg class="h-4 w-4 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-brand-text">StreamFlow</span>
+                </a>
+                <p class="text-sm text-brand-muted pr-4">Enterprise e-commerce automation for Ethiopian Telegram
+                    merchants. Transform your channel into a full-scale storefront.</p>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-brand-text mb-4">Product</h3>
+                <ul class="space-y-3">
+                    <li><a href="{% url 'dashboard:features' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Features</a></li>
+                    <li><a href="{% url 'dashboard:pricing' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Pricing</a></li>
+                    <li><a href="#"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Changelog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-brand-text mb-4">Company</h3>
+                <ul class="space-y-3">
+                    <li><a href="{% url 'dashboard:about' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">About</a></li>
+                    <li><a href="{% url 'dashboard:blog_hub' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Blog</a></li>
+                    <li><a href="{% url 'dashboard:contact' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-sm font-semibold text-brand-text mb-4">Legal</h3>
+                <ul class="space-y-3">
+                    <li><a href="{% url 'dashboard:privacy' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Privacy</a></li>
+                    <li><a href="{% url 'dashboard:terms' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">Terms</a></li>
+                    <li><a href="{% url 'dashboard:faq' %}"
+                            class="text-sm text-brand-muted hover:text-brand-cyan transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="mt-12 border-t border-brand-border/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-brand-muted">© 2026 StreamFlow. All rights reserved.</p>
+            <div class="flex gap-4">
+                <a href="#" class="text-brand-muted hover:text-brand-text transition-colors">
+                    <span class="sr-only">Telegram</span>
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-darker: var(--brand-darker);
+  --color-brand-card: var(--brand-card);
+  --color-brand-green: var(--brand-green);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-text: var(--brand-text);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-border: var(--brand-border);
+  --font-sans: "Space Grotesk", sans-serif;
+}
+
+@layer base {
+  :root {
+    --brand-dark: #f8fafc;
+    --brand-darker: #f1f5f9;
+    --brand-card: #ffffff;
+    --brand-green: #65a30d;
+    --brand-cyan: #0891b2;
+    --brand-text: #0f172a;
+    --brand-muted: #64748b;
+    --brand-border: #e2e8f0;
+  }
+
+  .dark {
+    --brand-dark: #090a0f;
+    --brand-darker: #06070a;
+    --brand-card: #12141d;
+    --brand-green: #a3e635;
+    --brand-cyan: #22d3ee;
+    --brand-text: #f8fafc;
+    --brand-muted: #94a3b8;
+    --brand-border: #1e293b;
+  }
+}
+
+@utility card {
+  @apply bg-brand-card border border-brand-border rounded-xl shadow-sm overflow-hidden transition-colors duration-300;
+}
+
+@utility input {
+  @apply flex h-10 w-full rounded-md border border-brand-border bg-transparent px-3 py-2 text-sm text-brand-text placeholder:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-cyan disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2;
+}
+
+@utility btn-primary {
+  @apply bg-brand-green text-brand-dark hover:bg-[#b0f53f] font-bold shadow-lg shadow-brand-green/20;
+}
+
+@utility btn-secondary {
+  @apply bg-brand-border text-brand-text hover:bg-brand-border/80;
+}
+
+@utility btn-ghost {
+  @apply hover:bg-brand-border hover:text-brand-text;
+}

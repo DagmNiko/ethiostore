@@ -1,0 +1,152 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-2xl font-bold text-brand-text">Store Settings</h1>
+    <p class="text-sm text-brand-muted mt-1">Configure your bot connections, payment gateways, and store defaults.</p>
+</div>
+
+<!-- Config sections mapped to Django views -->
+<form action="#" method="POST" class="space-y-8 max-w-4xl">
+
+    <!-- Bot Connection -->
+    <div class="card p-6">
+        <h2 class="text-lg font-semibold text-brand-text mb-2">Telegram Bot Connection</h2>
+        <p class="text-sm text-brand-muted mb-6 border-b border-brand-border/50 pb-4">Link your Telegram bot token
+            provided by BotFather.</p>
+
+        <div class="space-y-6">
+            <div>
+                <label for="bot_token" class="block text-sm font-medium leading-6 text-brand-text mb-2">Bot API Token</label>
+                <div class="flex gap-2">
+                    <input type="password" id="bot_token" name="bot_token" value="1234567890:ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        class="input flex-1 font-mono text-xs focus:ring-brand-green">
+                    <button type="button" class="btn btn-secondary">Test Connection</button>
+                </div>
+                <p class="text-xs text-brand-green mt-2 flex items-center gap-1">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Bot connected successfully to @AddisFashionBot
+                </p>
+            </div>
+
+            <div>
+                <label for="channel_id" class="block text-sm font-medium leading-6 text-brand-text mb-2">Primary Channel ID
+                    (for auto-posting)</label>
+                <input type="text" id="channel_id" name="channel_id" value="-100123456789"
+                    class="input font-mono focus:ring-brand-green">
+            </div>
+        </div>
+    </div>
+
+    <!-- Store Profile -->
+    <div class="card p-6">
+        <h2 class="text-lg font-semibold text-brand-text mb-2">Store Profile</h2>
+        <p class="text-sm text-brand-muted mb-6 border-b border-brand-border/50 pb-4">Details displayed to your
+            customers in the inline checkout app.</p>
+
+        <div class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label for="store_name" class="block text-sm font-medium leading-6 text-brand-text mb-2">Store
+                        Name</label>
+                    <input type="text" id="store_name" name="store_name" value="Addis Fashion"
+                        class="input focus:ring-brand-green">
+                </div>
+                <div>
+                    <label for="support_phone" class="block text-sm font-medium leading-6 text-brand-text mb-2">Support Phone
+                        / Contact</label>
+                    <input type="text" id="support_phone" name="support_phone" value="+251 911 234 567"
+                        class="input focus:ring-brand-green">
+                </div>
+            </div>
+
+            <div>
+                <label for="welcome_text" class="block text-sm font-medium leading-6 text-brand-text mb-2">Bot Welcome
+                    Message ( /start )</label>
+                <textarea id="welcome_text" name="welcome_text" rows="3"
+                    class="input resize-none h-auto focus:ring-brand-green">Welcome to Addis Fashion! 👗👟 
+Browse our latest collections below and order directly through Telegram. Free delivery inside Addis Ababa.</textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Gateways -->
+    <div class="card p-6">
+        <h2 class="text-lg font-semibold text-brand-text mb-2">Payment Integration</h2>
+        <p class="text-sm text-brand-muted mb-6 border-b border-brand-border/50 pb-4">Configure local payment gateways
+            for instant checkout.</p>
+
+        <div class="space-y-6">
+            <!-- Chapa -->
+            <div class="rounded-lg border border-brand-border p-4 bg-brand-dark">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="h-8 w-12 bg-white rounded border flex items-center justify-center font-bold text-green-700 text-xs shadow-sm">
+                            CHAPA
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-brand-text text-sm">Chapa API</h3>
+                            <p class="text-xs text-brand-muted">Accept cards, Telebirr, CBE, and more through Chapa.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-brand-muted text-xs">Enabled</span>
+                        <button type="button"
+                            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-brand-green transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:ring-offset-2 focus:ring-offset-brand-darker"
+                            role="switch" aria-checked="true">
+                            <span
+                                class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-brand-border/50">
+                    <label class="block text-xs font-medium text-brand-muted mb-1">Secret Key</label>
+                    <input type="password" value="CHASECK_TEST-12345" class="input py-1.5 text-xs font-mono h-auto">
+                </div>
+            </div>
+
+            <!-- Manual Transfer -->
+            <div class="rounded-lg border border-brand-border p-4 bg-brand-dark">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="h-8 w-12 bg-brand-darker rounded border border-brand-border flex items-center justify-center font-bold text-brand-text text-xs shadow-sm">
+                            BANK
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-brand-text text-sm">Manual Bank Transfer</h3>
+                            <p class="text-xs text-brand-muted">Display account numbers for manual deposit and receipt
+                                verification.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-brand-muted text-xs">Enabled</span>
+                        <button type="button"
+                            class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-brand-green transition-colors duration-200 ease-in-out focus:outline-none"
+                            role="switch" aria-checked="true">
+                            <span
+                                class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-brand-border/50">
+                    <textarea class="input h-auto resize-none text-sm" rows="3">CBE: 1000123456789 (Addis Fashion)
+Awash: 013245678900 (Addis Fashion)
+Telebirr: 0911234567</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-end border-t border-brand-border/50 pt-6">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>
+{% endblock %}

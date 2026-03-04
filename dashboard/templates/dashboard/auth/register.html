@@ -1,0 +1,86 @@
+{% extends 'dashboard/base_auth.html' %}
+{% load static %}
+
+{% block title %}Create Account - StreamFlow{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="text-3xl font-bold tracking-tight text-brand-text mb-2">Create an account</h2>
+    <p class="text-sm text-brand-muted mb-8">Start automating your Telegram store today.</p>
+</div>
+
+<div class="mt-10">
+    <form action="{% url 'dashboard:verify' %}" method="POST" class="space-y-6">
+        {% csrf_token %}
+        <div>
+            <label for="store_name" class="block text-sm font-medium leading-6 text-brand-text">Store Name</label>
+            <div class="mt-2">
+                <input id="store_name" name="store_name" type="text" placeholder="e.g. Addis Fashion" required
+                    class="input">
+            </div>
+        </div>
+
+        <div>
+            <label for="phone" class="block text-sm font-medium leading-6 text-brand-text">Phone Number</label>
+            <div class="mt-2 flex shadow-sm rounded-md">
+                <span
+                    class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-brand-border bg-brand-darker text-brand-muted sm:text-sm">
+                    +251
+                </span>
+                <input type="tel" name="phone" id="phone" class="input rounded-l-none" placeholder="911234567" required>
+            </div>
+        </div>
+
+        <div>
+            <label for="password" class="block text-sm font-medium leading-6 text-brand-text">Password</label>
+            <div class="mt-2">
+                <input id="password" name="password" type="password" required class="input">
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 mt-4">
+            <input id="terms" name="terms" type="checkbox" required
+                class="h-4 w-4 rounded border-brand-border bg-transparent text-brand-green focus:ring-brand-cyan focus:ring-offset-brand-dark">
+            <label for="terms" class="text-sm text-brand-muted">
+                I agree to the <a href="{% url 'dashboard:terms' %}"
+                    class="font-medium text-brand-green hover:text-brand-cyan">Terms of Service</a> & <a
+                    href="{% url 'dashboard:privacy' %}"
+                    class="font-medium text-brand-green hover:text-brand-cyan">Privacy Policy</a>
+            </label>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary w-full">Create Account</button>
+        </div>
+    </form>
+
+    <div class="mt-8">
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-brand-border/50"></div>
+            </div>
+            <div class="relative flex justify-center text-sm font-medium leading-6">
+                <span class="bg-brand-dark px-6 text-brand-muted">Or continue with</span>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <a href="#"
+                class="flex w-full items-center justify-center gap-3 rounded-md bg-[#2AABEE] px-3 py-2 text-sm font-semibold text-brand-text shadow-sm hover:bg-[#229ED9] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2AABEE]">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+                </svg>
+                <span class="text-sm font-semibold leading-6">Sign up with Telegram</span>
+            </a>
+        </div>
+    </div>
+
+    <p class="mt-10 text-center text-sm text-brand-muted">
+        Already have an account?
+        <a href="{% url 'dashboard:login' %}"
+            class="font-semibold leading-6 text-brand-green hover:text-brand-cyan transition-colors">Sign in to your
+            dashboard</a>
+    </p>
+</div>
+{% endblock %}
